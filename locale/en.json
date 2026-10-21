@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Douyin on hover",
+    "description": "Hover the hotspot to watch the Douyin recommendation feed inside DeepSeek Harness: wheel to switch clips, pause on leave. Signing and media proxying happen in the host half, so no sign-in is needed."
+  }
+}
