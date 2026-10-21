@@ -1,0 +1,4 @@
+# 统一按 LF 存储，避免 Windows 上反复出现「CRLF will be replaced」的噪音
+* text=auto eol=lf
+*.png binary
+*.jpg binary
