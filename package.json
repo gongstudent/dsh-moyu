@@ -1,11 +1,13 @@
 {
   "name": "dsh-moyu",
   "version": "0.1.0",
-  "description": "在 DeepSeek Harness 里刷抖音：悬停唤出的推荐流播放器，滚轮切视频。Host 侧做 X-Bogus 签名与媒体反代，无需登录。",
+  "description": "摸鱼套件 dsh-moyu 的抖音模块：悬停唤出的推荐流播放器，滚轮切视频，宿主侧做签名与媒体反代，无需登录。",
   "keywords": [
     "dsh",
     "dsh-plugin",
     "deepseek-harness",
+    "moyu",
+    "摸鱼",
     "douyin",
     "抖音",
     "client-plugin",
