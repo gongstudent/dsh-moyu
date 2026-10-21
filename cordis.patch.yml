@@ -1,0 +1,8 @@
+# dsh-douyin bundle patch —— 一行 host row。
+#
+# 这一行存在的唯一目的：让 client-modules 扫描到一个「已启用的 Loader entry」，
+# 从而把 package.json 里的 dsh.client 声明变成浏览器 bundle。
+# host 半边（lib/index.js）本身是有实质逻辑的：签名 + 抓推荐流 + 媒体代理。
+- insert:
+    - id: douyin
+      name: dsh-douyin

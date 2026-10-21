@@ -1,0 +1,55 @@
+{
+  "name": "dsh-douyin",
+  "version": "0.1.0",
+  "description": "在 DeepSeek Harness 里刷抖音：悬停唤出的推荐流播放器，滚轮切视频。Host 侧做 X-Bogus 签名与媒体反代，无需登录。",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "douyin",
+    "抖音",
+    "client-plugin",
+    "video",
+    "recommend-feed"
+  ],
+  "license": "MIT",
+  "author": "gongstudent",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gongstudent/dsh-douyin.git"
+  },
+  "homepage": "https://github.com/gongstudent/dsh-douyin#readme",
+  "bugs": {
+    "url": "https://github.com/gongstudent/dsh-douyin/issues"
+  },
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "vendor",
+    "cordis.patch.yml",
+    "README.md",
+    "ARCHITECTURE.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
