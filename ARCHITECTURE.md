@@ -121,6 +121,7 @@ x / y 是「自由空间的比例」而不是绝对像素：
 | 拖动起点取 store 里的比例，不取矩形 | 纯位移拖动只需要 delta。取矩形会在存在 containing block 时产生固定偏移，表现为抓起瞬间「跳一下」 |
 | wheel 用原生监听 + `passive: false` | React 17+ 把 wheel 当 passive 挂在根节点，`onWheel` 里的 `preventDefault()` 无效，页面会跟着滚 |
 | 监听 `volumechange` 回写设置 | 播放器用原生 `controls`，用户从控制条改静音时 React 感知不到；不回写的话，隐藏再显示会把旧值覆盖回去 |
+| 控制条用 `controlsList="nofullscreen"` 去掉全屏键 | 控制条在 UA shadow root 里，CSS 够不到单个按钮，这是唯一受支持的单键隐藏方式。浮层是 320×460 的固定热点，全屏会占满整个界面；鼠标一移开就收起面板，全屏播放器会留在原地且没有可见的退出路径 |
 | `volumechange` 的 effect 依赖里带 `feed` | `<video>` 是数据到位后才挂载的；只依赖 index/view/inside 时 effect 第一次跑在 `ref === null`，之后不再重跑，监听永远挂不上 |
 | `Ctrl/Cmd + 滚轮` 放行 | 那是浏览器缩放，拦掉会让鼠标停在面板上时无法缩放 |
 | 隐藏态加 `aria-hidden` | 看不见但会被读屏软件念出来的 dialog 是个陷阱 |
