@@ -45,6 +45,7 @@ path 必须以 `/api/` 开头，鉴权（Host/Origin 栅栏 + 浏览器 cookie�
 | GET | `/api/douyin/state` | `{ ok, hasCookie, version }` |
 | POST | `/api/douyin/cookie` | body `{ cookie }`，落盘 `~/.dsh/storages/dsh-moyu.json`；空串=清除 |
 | GET | `/api/douyin/feed?count=10&refreshIndex=1` | 签名后抓推荐流，归一化成统一 item |
+| POST | `/api/douyin/bootstrap` | 开一次无头浏览器把 `ttwid` 取回来并存盘 |
 | GET/HEAD | `/api/douyin/media?u=<encoded>` | 媒体反代，透传 `Range` |
 
 ### feed 归一化
@@ -123,6 +124,8 @@ x / y 是「自由空间的比例」而不是绝对像素：
 | `volumechange` 的 effect 依赖里带 `feed` | `<video>` 是数据到位后才挂载的；只依赖 index/view/inside 时 effect 第一次跑在 `ref === null`，之后不再重跑，监听永远挂不上 |
 | `Ctrl/Cmd + 滚轮` 放行 | 那是浏览器缩放，拦掉会让鼠标停在面板上时无法缩放 |
 | 隐藏态加 `aria-hidden` | 看不见但会被读屏软件念出来的 dialog 是个陷阱 |
+| `ttwid` 只能「去拿」不能「生成」 | 它是服务端签名的 `1|<base62>|<时间戳>|<签名>`，本地合成必被拒（实测三种形态全部返回 `blocked`） |
+| 引导用 CDP over pipe 而非 WebSocket | 宿主跑在 `ELECTRON_RUN_AS_NODE` 子进程里，拿不到 Electron 的 `BrowserWindow`，只能外部起浏览器；`--remote-debugging-pipe` 走 fd 3/4 传 `\0` 分隔的裸 JSON，不依赖 `globalThis.WebSocket`，任何 Node 版本都能跑 |
 
 ## 与 touchFish 的差异
 
