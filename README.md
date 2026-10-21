@@ -48,17 +48,45 @@
 
 ## 安装
 
-需要已经装好 DeepSeek Harness（桌面版）。
+**直接从这里装，不用克隆仓库。** 插件没有任何 npm 依赖（签名库已内联在 `vendor/`），
+pnpm 拉下来就能用。
+
+### 桌面版（Desktop / 任意 Electron 发行版）
+
+`dsh` 全局命令只对 `plugin` 子命令放行 desktop profile，而且它的版本可能和应用本体不一致；
+**用 Harness 自带的 CLI 最稳**，版本保证对齐：
 
 ```powershell
-# 克隆
-git clone https://github.com/gongstudent/dsh-moyu.git D:\个人项目\dsh-moyu
-
-# 装进 desktop profile（必须用 Desktop 自带的 CLI，全局 dsh 会拒绝 desktop profile）
-& "<Harness 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add "D:\个人项目\dsh-moyu"
+& "<Harness 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add github:gongstudent/dsh-moyu
 ```
 
-装完**完全退出并重启** Harness——CLI 只改 `package.json` 与 `node_modules`，不触发 HMR。
+### Web / CLI 版
+
+装了 `npm i -g @deepseek-ai/dsh` 的话：
+
+```powershell
+dsh plugin add github:gongstudent/dsh-moyu
+```
+
+### 装完
+
+**完全退出并重启**——CLI 只改 profile 的 `package.json` 与 `node_modules`，不触发 HMR。
+
+想固定版本，在规格后面加 ref：
+
+```
+github:gongstudent/dsh-moyu           # 默认分支，跟最新
+github:gongstudent/dsh-moyu#main      # 显式指定分支
+github:gongstudent/dsh-moyu#v0.1.0    # 指定 tag（发布后才有，见 Releases）
+```
+
+### 卸载
+
+```powershell
+dsh plugin remove dsh-moyu
+```
+
+> 想改代码才需要 `git clone`，见下面「开发」。
 
 ## 首次配置：拿一个 `ttwid`
 
@@ -126,6 +154,15 @@ git clone https://github.com/gongstudent/dsh-moyu.git D:\个人项目\dsh-moyu
 - **抖音随时可能改接口**。签名参数、字段名一变就得跟。
 
 ## 开发
+
+要改代码时：
+
+```powershell
+git clone https://github.com/gongstudent/dsh-moyu.git
+& "<Harness 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add "<克隆下来的目录>"
+```
+
+以本地目录安装时，profile 里记的是 `link:`（软链），改完源码立刻生效，不用重装。
 
 ```
 lib/index.js     宿主半边：签名 / feed / 媒体反代 / 凭据存储
