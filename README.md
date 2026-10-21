@@ -1,6 +1,9 @@
-# dsh-douyin
+# dsh-moyu
 
-在 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 的界面上刷抖音。
+> **moyu** = 摸鱼。这是一个给 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)
+> 用的摸鱼套件，**抖音是它的第一个模块**——名字不带平台，后面加 B 站、网易云、播客都不用改名。
+
+在 DeepSeek Harness 的界面上刷抖音。
 
 鼠标移到屏幕上一块隐形热点上，抖音推荐流就地展开成播放器；移开自动收起、暂停；
 滚轮上下切视频。**全程不需要登录抖音账号。**
@@ -49,10 +52,10 @@
 
 ```powershell
 # 克隆
-git clone https://github.com/gongstudent/dsh-douyin.git D:\个人项目\dsh-douyin
+git clone https://github.com/gongstudent/dsh-moyu.git D:\个人项目\dsh-moyu
 
 # 装进 desktop profile（必须用 Desktop 自带的 CLI，全局 dsh 会拒绝 desktop profile）
-& "<Harness 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add "D:\个人项目\dsh-douyin"
+& "<Harness 安装目录>\resources\runtime\cli\bin\dsh.cmd" plugin --profile desktop add "D:\个人项目\dsh-moyu"
 ```
 
 装完**完全退出并重启** Harness——CLI 只改 `package.json` 与 `node_modules`，不触发 HMR。
@@ -66,7 +69,7 @@ git clone https://github.com/gongstudent/dsh-douyin.git D:\个人项目\dsh-douy
 3. 复制 `ttwid` 的值
 4. 面板齿轮 → 设置 → 粘贴 `ttwid=<值>`
 
-凭据存在本机 `~/.dsh/storages/dsh-douyin.json`，不经过网络、不上传任何地方。
+凭据存在本机 `~/.dsh/storages/dsh-moyu.json`，不经过网络、不上传任何地方。
 
 > 哪天又变 `blocked`，重复上面四步即可。
 
@@ -94,7 +97,7 @@ git clone https://github.com/gongstudent/dsh-douyin.git D:\个人项目\dsh-douy
 | 调整位置 | 进入拖动模式 | — |
 
 位置用「自由空间的比例」而不是绝对坐标，所以换显示器 / 改窗口大小后不会跑到屏幕外。
-设置存在浏览器 `localStorage`（`dsh-douyin/settings`），只影响本机界面。
+设置存在浏览器 `localStorage`（`dsh-moyu/settings`），只影响本机界面。
 
 ## 架构
 
@@ -130,6 +133,10 @@ lib/client.js    浏览器半边：两个槽位的 UI 与交互
 vendor/          内联的 xbogus 1.0.2（ISC），理由见 vendor/README.md
 cordis.patch.yml bundle patch，一行 insert
 ```
+
+新增平台时按同样的形状加：`/api/<平台>/*` 路由 + 一个 `lib/<平台>.js`，
+槽位 id 用 `<平台>` 区分（当前是 `douyin`）。API 路由保留平台名而不是套一层 `/api/moyu/`——
+路由描述的是数据源，不是包名。
 
 改 `lib/client.js` 后刷新窗口（`Ctrl+R`）即可生效；改 `lib/index.js` 需要重启 Harness。
 

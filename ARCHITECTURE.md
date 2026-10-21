@@ -1,5 +1,8 @@
 # 架构
 
+> 包名 `dsh-moyu`（摸鱼），当前只实现抖音模块。API 路由保留 `/api/douyin/*`，
+> 因为路由描述的是数据源；新增平台时按 `/api/<平台>/*` 平行扩展。
+
 ## 两个运行时
 
 DSH 插件分成两个 bundle，跑在完全不同的地方：
@@ -40,7 +43,7 @@ path 必须以 `/api/` 开头，鉴权（Host/Origin 栅栏 + 浏览器 cookie�
 | 方法 | 路径 | 说明 |
 |---|---|---|
 | GET | `/api/douyin/state` | `{ ok, hasCookie, version }` |
-| POST | `/api/douyin/cookie` | body `{ cookie }`，落盘 `~/.dsh/storages/dsh-douyin.json`；空串=清除 |
+| POST | `/api/douyin/cookie` | body `{ cookie }`，落盘 `~/.dsh/storages/dsh-moyu.json`；空串=清除 |
 | GET | `/api/douyin/feed?count=10&refreshIndex=1` | 签名后抓推荐流，归一化成统一 item |
 | GET/HEAD | `/api/douyin/media?u=<encoded>` | 媒体反代，透传 `Range` |
 
@@ -102,7 +105,7 @@ settingsStore.commit()         // 落盘一次（拖动结束）
 settingsStore.subscribe(fn)    // 返回取消订阅函数
 ```
 
-持久化到 `localStorage['dsh-douyin/settings']`：`{ enabled, opacity, x, y, muted }`。
+持久化到 `localStorage['dsh-moyu/settings']`：`{ enabled, opacity, x, y, muted }`。
 `adjusting` 是窗口状态，序列化时排除。
 
 x / y 是「自由空间的比例」而不是绝对像素：
