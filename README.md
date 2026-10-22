@@ -249,6 +249,8 @@ ttwid=1%7C你刚才复制的值
 
 ## 开发
 
+发布与收录渠道（市场索引、GitHub topics、awesome-dsh-plugin、npm）见 [PROMOTION.md](PROMOTION.md)。
+
 要改代码时：
 
 ```powershell
