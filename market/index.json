@@ -1,0 +1,60 @@
+{
+  "format": 1,
+  "title": "摸鱼插件",
+  "description": "DeepSeek Harness 的摸鱼系列插件。",
+  "metadata": {
+    "categories": {
+      "media": {
+        "title": {
+          "en": "Media",
+          "zh": "影音"
+        }
+      }
+    },
+    "labels": {},
+    "sortKeys": {}
+  },
+  "plugins": [
+    {
+      "name": "dsh-moyu",
+      "title": {
+        "en": "Douyin on hover",
+        "zh": "抖音摸鱼"
+      },
+      "description": {
+        "en": "Hover-reveal Douyin feed inside DeepSeek Harness: wheel to switch clips, pause on leave, no sign-in required.",
+        "zh": "在 Harness 界面里悬停刷抖音推荐流：移入播放、移出暂停、滚轮切换，无需登录。"
+      },
+      "icon": "https://raw.githubusercontent.com/gongstudent/dsh-moyu/main/icon.svg",
+      "author": "gongstudent",
+      "homepage": "https://github.com/gongstudent/dsh-moyu#readme",
+      "repository": {
+        "url": "https://github.com/gongstudent/dsh-moyu"
+      },
+      "metadata": {
+        "category": "media",
+        "keywords": [
+          "douyin",
+          "抖音",
+          "video",
+          "hover",
+          "feed"
+        ]
+      },
+      "versions": [
+        {
+          "version": "0.1.0",
+          "publishTimestamp": 1792583461,
+          "source": {
+            "type": "git",
+            "url": "https://github.com/gongstudent/dsh-moyu",
+            "commit": "f0ef52a99186081b437d9a043cce0da400f7d81d"
+          },
+          "engines": {
+            "dsh": ">=0.2.0-rc.2"
+          }
+        }
+      ]
+    }
+  ]
+}

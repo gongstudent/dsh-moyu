@@ -86,6 +86,21 @@ github:gongstudent/dsh-moyu#v0.1.0    # 指定 tag（发布后才有，见 Relea
 dsh plugin remove dsh-moyu
 ```
 
+### 通过插件市场安装
+
+本仓库自带一份符合 **format 1** 规范的市场索引：[market/index.json](market/index.json)。
+
+在 Harness 里打开 **插件** → 点实验性插件旁的「更多」→ 打开「自定义插件市场」→
+在索引源里添加：
+
+```
+https://raw.githubusercontent.com/gongstudent/dsh-moyu/main/market/index.json
+```
+
+之后「发现」标签页里就能看到「抖音摸鱼」并一键安装。
+
+索引钉在具体 commit 上，由 `scripts/update-market-index.mjs` 生成——每次发布前跑一次即可。
+
 > 想改代码才需要 `git clone`，见下面「开发」。
 
 ## 首次配置：点一下「自动获取」
