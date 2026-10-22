@@ -60,15 +60,16 @@ https://raw.githubusercontent.com/gongstudent/dsh-moyu/main/market/index.json
 - `icon` 必须是 https，或与索引同源；也可以是 base64 data URL（解码后 ≤ 32 KiB）
 - `metadata.category` / `labels` 必须先在索引顶层 `metadata` 里声明过
 
-## 渠道二：GitHub topics（⬜ 待做，1 分钟）
+## 渠道二：GitHub topics（✅ 已完成）
 
 `dshplugin.market` 的采集器按 GitHub topic 扫仓库，不用提交任何表单。
-
-在仓库主页右侧齿轮 → **Topics**，添加：
+仓库当前 topics：
 
 ```
-dsh-plugin  deepseek-harness  dsh  douyin  video  hover-ui
+deepseek-harness  deepseek-harness-plugin  douyin  dsh-plugin  dsh-plugins  moyu
 ```
+
+`dsh-plugin` 是 awesome-dsh-plugin 的**强制要求**，不能删。
 
 ## 渠道三：awesome-dsh-plugin（⬜ 待提 PR）
 
@@ -77,7 +78,29 @@ dsh-plugin  deepseek-harness  dsh  douyin  video  hover-ui
 
 - 收录方式：**在该仓库 `data/plugins/` 下新增一个 YAML 文件，然后提 PR**
 - 两个 README 由脚本生成，**不要手改**
-- 提 PR 前先读它的 `contributing.md` 拿当前 schema；本文件的作者曾因缺少样例而没有代写条目
+- 文件名必须叫 `<owner>__<repo>.yml` → `gongstudent__dsh-moyu.yml`
+- 提交内容已经写好，就在 [market/gongstudent__dsh-moyu.yml](market/gongstudent__dsh-moyu.yml)，
+  复制到对方的 `data/plugins/` 即可
+
+### 提 PR 前的硬性门槛（逐条核对）
+
+| 门槛 | 状态 |
+|---|---|
+| `package.json` 声明 `dsh.bundle`（只有 `dsh.client` 会被拒） | ✅ `bundle.patch` + `client.platform` 都有 |
+| 仓库根有 `cordis.patch.yml`，形如 `insert: [{id, name}]` | ✅ id `moyu` / name `dsh-moyu` |
+| 有真实可用代码 | ✅ |
+| **仓库创建满 1 天**（CI 自动查） | ⏳ 创建于 `2026-10-21 09:14 UTC`，**当日 17:14（UTC+8）后达标** |
+| 加了 `dsh-plugin` topic | ✅ |
+| 描述只讲功能、不带营销词、且**与代码相符** | ✅ 已核对 |
+| 分类贴合实际功能 | ✅ `fun` |
+
+### 审查看什么
+
+CI 绿只是**前置条件**，不是结论。维护者会真的读一遍仓库，主要看两件事：
+描述是否属实（提到某个命令/API 就必须真实存在）、分类是否贴切。
+夸大描述是「本来不错的插件被打回」的头号原因。
+
+合并后两个 README 会在 `main` 上自动重建，不需要我们再跑任何东西。
 
 ## 渠道四：npm（⬜ 可选）
 
