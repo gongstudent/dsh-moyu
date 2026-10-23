@@ -43,12 +43,12 @@
       },
       "versions": [
         {
-          "version": "0.1.0",
-          "publishTimestamp": 1792583461,
+          "version": "0.1.1",
+          "publishTimestamp": 1792734225,
           "source": {
             "type": "git",
             "url": "https://github.com/gongstudent/dsh-moyu",
-            "commit": "f0ef52a99186081b437d9a043cce0da400f7d81d"
+            "commit": "ce3106691fbdf63ed0501a14245a17b1ebb09e3d"
           },
           "engines": {
             "dsh": ">=0.2.0-rc.2"
