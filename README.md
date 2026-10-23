@@ -77,7 +77,7 @@ dsh plugin add github:gongstudent/dsh-moyu
 ```
 github:gongstudent/dsh-moyu           # 默认分支，跟最新
 github:gongstudent/dsh-moyu#main      # 显式指定分支
-github:gongstudent/dsh-moyu#v0.1.0    # 指定 tag（发布后才有，见 Releases）
+github:gongstudent/dsh-moyu#v0.1.1    # 钉一个已发布的 tag
 ```
 
 ### 卸载
