@@ -126,6 +126,8 @@ x / y 是「自由空间的比例」而不是绝对像素：
 | `Ctrl/Cmd + 滚轮` 放行 | 那是浏览器缩放，拦掉会让鼠标停在面板上时无法缩放 |
 | 隐藏态加 `aria-hidden` | 看不见但会被读屏软件念出来的 dialog 是个陷阱 |
 | `ttwid` 只能「去拿」不能「生成」 | 它是服务端签名的 `1|<base62>|<时间戳>|<签名>`，本地合成必被拒（实测三种形态全部返回 `blocked`） |
+| 媒体代理只设「响应头超时」，不设总时限 | `<video>` 会保持一条 Range 连接边走边读，可能活几分钟。用从请求开始计时的总超时，会在播到一半掐断上游；而截断后配合 `loop` 的表现正是「视频还没播完就从头重播」。实测一个 75 MB 的片子要流 34 秒，30 秒上限刚好会踩中 |
+| 媒体 body 用 pull，而不是往队列里灌 | 灌队列等于把整个视频先缓存进内存（单个就有 75 MB），而且会把上游抽干、与播放进度脱钩。pull 之后内存只占一个 highWaterMark，上游跟着下游节奏走 |
 | 引导用 CDP over pipe 而非 WebSocket | 宿主跑在 `ELECTRON_RUN_AS_NODE` 子进程里，拿不到 Electron 的 `BrowserWindow`，只能外部起浏览器；`--remote-debugging-pipe` 走 fd 3/4 传 `\0` 分隔的裸 JSON，不依赖 `globalThis.WebSocket`，任何 Node 版本都能跑 |
 
 ## 与 touchFish 的差异
