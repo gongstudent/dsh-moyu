@@ -1,6 +1,6 @@
 {
   "name": "dsh-moyu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "摸鱼套件 dsh-moyu 的抖音模块：悬停唤出的推荐流播放器，滚轮切视频，宿主侧做签名与媒体反代，无需登录。",
   "keywords": [
     "dsh",
